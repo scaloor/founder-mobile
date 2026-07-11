@@ -7,7 +7,7 @@
     "./schema": "./src/schema.ts"
   },
   "scripts": {
-    "typecheck": "tsc -p tsconfig.json",
+    "typecheck": "tsgo -p tsconfig.json",
     "generate": "drizzle-kit generate"
   },
   "dependencies": {
@@ -15,6 +15,6 @@
   },
   "devDependencies": {
     "drizzle-kit": "latest",
-    "typescript": "^5.9.3"
+    "typescript": "7.0.2"
   }
 }

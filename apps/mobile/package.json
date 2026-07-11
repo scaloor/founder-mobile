@@ -7,7 +7,7 @@
     "ios": "expo start --ios",
     "android": "expo start --android",
     "web": "expo start --web",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsgo -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@founder-mobile/ui": "workspace:*",
@@ -21,6 +21,6 @@
   },
   "devDependencies": {
     "@types/react": "latest",
-    "typescript": "^5.9.3"
+    "typescript": "7.0.2"
   }
 }

@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev src/worker.ts --local --port 8787",
-    "typecheck": "tsc -p tsconfig.json",
+    "typecheck": "tsgo -p tsconfig.json",
     "deploy": "wrangler deploy src/worker.ts"
   },
   "dependencies": {
@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "latest",
-    "typescript": "^5.9.3",
+    "typescript": "7.0.2",
     "wrangler": "latest"
   }
 }

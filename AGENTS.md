@@ -8,6 +8,7 @@ Guidance for coding agents working in this repo.
 - Prefer Cloudflare-native primitives before introducing external infrastructure.
 - Use Alchemy stages for every deployed environment.
 - Use Alchemy's Infrastructure-as-Effects style for new infrastructure/runtime work where the installed Alchemy version supports it: bind capabilities through typed services/layers rather than hand-rolled env lookups.
+- Type checking uses TypeScript 7's native Go checker (`tsgo`) through `bun run typecheck`; do not replace it with legacy `tsc` unless explicitly asked.
 - Do not put secrets in source, docs, prompts, or generated reports.
 - Keep agent-facing tools/endpoints narrow and semantic; avoid raw SQL/API escape hatches.
 

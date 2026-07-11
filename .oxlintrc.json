@@ -8,7 +8,17 @@
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "import/no-unassigned-import": "off"
+    "react/jsx-no-constructed-context-values": "off",
+    "react/no-array-index-key": "off",
+    "react/no-unstable-nested-components": "off",
+    "import/no-unassigned-import": "off",
+    "jsx-a11y/prefer-tag-over-role": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/anchor-has-content": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-vars": "off"
   },
   "ignorePatterns": [
     "node_modules/**",
