@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import { MobileCard } from "@founder-mobile/ui";
+import { PROJECT_DISPLAY_NAME } from "../../../project";
+import { MobileCard } from "../../../packages/ui/src/index.native";
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <MobileCard>
-        <Text style={styles.eyebrow}>Founder Mobile</Text>
+        <Text style={styles.eyebrow}>{PROJECT_DISPLAY_NAME}</Text>
         <Text style={styles.title}>Expo app placeholder</Text>
         <Text style={styles.body}>
           Shared design primitives are wired. Add product flows once the template is cloned into a

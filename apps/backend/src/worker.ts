@@ -1,7 +1,8 @@
 import { Hono } from "hono";
 import { Effect, pipe } from "effect";
-import { createAuth } from "@founder-mobile/auth";
-import { createD1Database, schema } from "@founder-mobile/db";
+import { PROJECT_SLUG } from "../../../project";
+import { createAuth } from "../../../packages/auth/src/index";
+import { createD1Database, schema } from "../../../packages/db/src/index";
 
 export interface Env {
   DB: D1Database;
@@ -19,7 +20,7 @@ app.on(["GET", "POST"], "/api/auth/**", (c) => createAuth(c.env).handler(c.req.r
 app.get("/health", (c) =>
   c.json({
     ok: true,
-    service: "founder-mobile-backend",
+    service: `${PROJECT_SLUG}-backend`,
     environment: c.env.ENVIRONMENT ?? "local",
   }),
 );
@@ -27,7 +28,7 @@ app.get("/health", (c) =>
 app.get("/api/reports/context", async (c) => {
   const program = pipe(
     Effect.succeed({
-      app: "founder-mobile",
+      app: PROJECT_SLUG,
       database: "Cloudflare D1 via Drizzle",
       tables: Object.keys(schema),
       note: "Replace this with product-specific report/read-model queries.",

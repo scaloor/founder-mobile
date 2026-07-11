@@ -1,9 +1,10 @@
 import * as Alchemy from "alchemy";
 import * as Cloudflare from "alchemy/Cloudflare";
 import * as Effect from "effect/Effect";
+import { PROJECT_SLUG, projectResourceName } from "../project";
 
 export default Alchemy.Stack(
-  "founder-mobile",
+  PROJECT_SLUG,
   {
     providers: Cloudflare.providers(),
     state: Cloudflare.state(),
@@ -14,12 +15,12 @@ export default Alchemy.Stack(
     const isProd = stage === "prod";
 
     const names = {
-      d1: `founder-mobile-${stage}-db`,
-      r2: `founder-mobile-${stage}-files`,
-      kv: `founder-mobile-${stage}-cache`,
-      queue: `founder-mobile-${stage}-jobs`,
-      apiWorker: `founder-mobile-${stage}-api`,
-      webWorker: `founder-mobile-${stage}-web`,
+      d1: projectResourceName(stage, "db"),
+      r2: projectResourceName(stage, "files"),
+      kv: projectResourceName(stage, "cache"),
+      queue: projectResourceName(stage, "jobs"),
+      apiWorker: projectResourceName(stage, "api"),
+      webWorker: projectResourceName(stage, "web"),
     };
 
     const db = yield* Cloudflare.D1.Database("db", {

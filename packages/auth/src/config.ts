@@ -1,5 +1,7 @@
+import { PROJECT_DISPLAY_NAME } from "../../../project";
+
 export const authBasePath = "/api/auth";
-export const authAppName = "Founder Mobile";
+export const authAppName = PROJECT_DISPLAY_NAME;
 export const fallbackDevelopmentSecret = "dev-only-better-auth-secret-change-before-production";
 
 export function parseTrustedOrigins(value: string | undefined) {
