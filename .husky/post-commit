@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+if [ "$SKIP_PREVIEW_DEPLOY" = "1" ]; then
+  echo "Skipping branch preview deploy because SKIP_PREVIEW_DEPLOY=1."
+  exit 0
+fi
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+case "$branch" in
+  main|master|prod|production)
+    echo "Protected branch '$branch': skipping automatic preview deploy."
+    echo "Use an explicit production/staging deploy, or set ALLOW_PROTECTED_PREVIEW=1 and run bun run preview:deploy manually."
+    exit 0
+    ;;
+esac
+
+bun run preview:deploy

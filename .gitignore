@@ -1,0 +1,14 @@
+node_modules/
+.bun/
+.turbo/
+.expo/
+dist/
+build/
+.output/
+.wrangler/
+.alchemy/
+.env
+.env.*
+!.env.example
+*.local
+.DS_Store

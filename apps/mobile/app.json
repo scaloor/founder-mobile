@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "founder-mobile",
+    "slug": "founder-mobile",
+    "scheme": "foundermobile",
+    "orientation": "portrait",
+    "newArchEnabled": true,
+    "plugins": ["expo-router"]
+  }
+}

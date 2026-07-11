@@ -1,0 +1,33 @@
+{
+  "name": "founder-mobile",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "infra"
+  ],
+  "scripts": {
+    "dev:web": "bun --cwd apps/web dev",
+    "dev:mobile": "bun --cwd apps/mobile start",
+    "dev:backend": "bun --cwd apps/backend dev",
+    "typecheck": "tsc -p packages/db && tsc -p packages/ui && tsc -p apps/backend && tsc -p apps/web && tsc -p apps/mobile --noEmit && tsc -p infra",
+    "build": "bun run typecheck",
+    "prepare": "husky",
+    "preview:deploy": "bun scripts/deploy-branch-preview.ts",
+    "preview:destroy": "bun scripts/destroy-branch-preview.ts",
+    "preview:info": "bun scripts/preview-info.ts",
+    "deploy": "alchemy deploy",
+    "destroy": "alchemy destroy",
+    "db:generate": "bun --cwd packages/db drizzle-kit generate",
+    "db:studio": "bun --cwd packages/db drizzle-kit studio"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "latest",
+    "@types/bun": "latest",
+    "alchemy": "latest",
+    "husky": "latest",
+    "typescript": "^5.9.3",
+    "wrangler": "latest"
+  }
+}

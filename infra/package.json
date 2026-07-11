@@ -1,0 +1,14 @@
+{
+  "name": "@founder-mobile/infra",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "alchemy": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

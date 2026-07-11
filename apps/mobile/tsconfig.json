@@ -1,0 +1,11 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": "../..",
+    "paths": {
+      "@founder-mobile/ui": ["packages/ui/src/index.native.tsx"]
+    }
+  },
+  "include": ["app/**/*.tsx", "expo-env.d.ts", "../../packages/ui/src/**/*.tsx"]
+}

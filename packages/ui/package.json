@@ -1,0 +1,22 @@
+{
+  "name": "@founder-mobile/ui",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "react-native": "./src/index.native.tsx",
+      "default": "./src/index.tsx"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "typescript": "^5.9.3"
+  }
+}
