@@ -4,8 +4,14 @@
     "strict": true,
     "baseUrl": "../..",
     "paths": {
-      "@founder-mobile/ui": ["packages/ui/src/index.native.tsx"]
+      "@founder-mobile/ui": ["packages/ui/src/index.native.tsx"],
+      "@/*": ["packages/ui/src/*"]
     }
   },
-  "include": ["app/**/*.tsx", "expo-env.d.ts", "../../packages/ui/src/**/*.tsx"]
+  "include": [
+    "app/**/*.tsx",
+    "expo-env.d.ts",
+    "../../packages/ui/src/**/*.ts",
+    "../../packages/ui/src/**/*.tsx"
+  ]
 }

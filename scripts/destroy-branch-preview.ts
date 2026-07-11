@@ -4,7 +4,9 @@ import { previewContext } from "./branch-stage";
 const { branch, stage } = previewContext();
 
 if (process.env.CONFIRM_DESTROY_PREVIEW !== "1") {
-  console.error(`Refusing to destroy preview for branch '${branch}' / stage '${stage}' without CONFIRM_DESTROY_PREVIEW=1.`);
+  console.error(
+    `Refusing to destroy preview for branch '${branch}' / stage '${stage}' without CONFIRM_DESTROY_PREVIEW=1.`,
+  );
   console.error(`Run: CONFIRM_DESTROY_PREVIEW=1 bun run preview:destroy`);
   process.exit(1);
 }

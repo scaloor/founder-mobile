@@ -8,7 +8,9 @@ export const businesses = sqliteTable("businesses", {
 
 export const reports = sqliteTable("reports", {
   id: text("id").primaryKey(),
-  businessId: text("business_id").notNull().references(() => businesses.id),
+  businessId: text("business_id")
+    .notNull()
+    .references(() => businesses.id),
   kind: text("kind").notNull(),
   periodStart: text("period_start").notNull(),
   periodEnd: text("period_end").notNull(),

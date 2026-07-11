@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "jsx-a11y", "import"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "warn"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "import/no-unassigned-import": "off"
+  },
+  "ignorePatterns": [
+    "node_modules/**",
+    "dist/**",
+    ".alchemy/**",
+    ".wrangler/**",
+    ".tanstack/**",
+    ".expo/**",
+    "apps/web/.output/**",
+    "apps/web/.vinxi/**"
+  ]
+}

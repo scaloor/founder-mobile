@@ -12,9 +12,9 @@
     "@tanstack/react-router": "latest",
     "@tanstack/react-start": "latest",
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "vite": "latest"
   },
   "devDependencies": {
     "@types/react": "latest",

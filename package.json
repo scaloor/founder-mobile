@@ -1,16 +1,20 @@
 {
   "name": "founder-mobile",
   "private": true,
-  "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*",
     "infra"
   ],
+  "type": "module",
   "scripts": {
     "dev:web": "bun --cwd apps/web dev",
     "dev:mobile": "bun --cwd apps/mobile start",
     "dev:backend": "bun --cwd apps/backend dev",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint .",
+    "check": "bun run format:check && bun run lint && bun run typecheck",
     "typecheck": "tsc -p packages/db && tsc -p packages/ui && tsc -p apps/backend && tsc -p apps/web && tsc -p apps/mobile --noEmit && tsc -p infra",
     "build": "bun run typecheck",
     "prepare": "husky",
@@ -30,6 +34,9 @@
     "alchemy": "^2.0.0-beta.61",
     "effect": "4.0.0-beta.93",
     "husky": "latest",
+    "oxfmt": "^0.58.0",
+    "oxlint": "^1.73.0",
+    "shadcn": "^4.13.0",
     "typescript": "^5.9.3",
     "wrangler": "latest"
   }

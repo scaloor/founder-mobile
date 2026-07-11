@@ -5,14 +5,14 @@ import "./styles.css";
 function App() {
   return (
     <main className="shell">
-      <Card>
+      <Card className="founder-card">
         <p className="eyebrow">Cloudflare-native Bun monorepo</p>
         <h1>Founder Mobile template</h1>
         <p>
-          TanStack Start-ready web app, Expo mobile app, Hono + Effect backend,
-          Drizzle on D1, and Alchemy-powered preview infrastructure.
+          TanStack Start-ready web app, Expo mobile app, Hono + Effect backend, Drizzle on D1, and
+          Alchemy-powered preview infrastructure.
         </p>
-        <Button>Open report context</Button>
+        <Button className="founder-button">Open report context</Button>
       </Card>
     </main>
   );

@@ -8,8 +8,8 @@ export default function HomeScreen() {
         <Text style={styles.eyebrow}>Founder Mobile</Text>
         <Text style={styles.title}>Expo app placeholder</Text>
         <Text style={styles.body}>
-          Shared design primitives are wired. Add product flows once the template
-          is cloned into a real project.
+          Shared design primitives are wired. Add product flows once the template is cloned into a
+          real project.
         </Text>
       </MobileCard>
     </View>

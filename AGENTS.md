@@ -15,12 +15,16 @@ Guidance for coding agents working in this repo.
 
 Coding agents should treat a completed code-changing turn as a validated checkpoint:
 
-1. Run the relevant validation, usually:
+1. Run the standard end-of-turn checks:
 
    ```bash
    bun install # if dependencies changed
+   bun run format
+   bun run lint
    bun run typecheck
    ```
+
+   `bun run check` can be used when you want the non-writing formatter check plus lint and typecheck in one command.
 
 2. Commit the finished changes with a clear message.
 3. The `post-commit` hook deploys the current feature branch as an Alchemy stage.
@@ -63,8 +67,16 @@ Preview deployment state and logs live under `.git/` and must not be committed.
 Before committing changes, run:
 
 ```bash
-bun install
+bun install # if dependencies changed
+bun run format
+bun run lint
 bun run typecheck
+```
+
+For CI-style validation without rewriting files, run:
+
+```bash
+bun run check
 ```
 
 If infrastructure files change, also run a dry/planning deploy once the project has concrete Cloudflare resources configured.

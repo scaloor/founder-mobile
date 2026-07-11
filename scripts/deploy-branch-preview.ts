@@ -51,12 +51,18 @@ if (process.env.SKIP_PREVIEW_DEPLOY === "1") {
 const context = previewContext();
 const previous = readState();
 
-if (previous?.stage === context.stage && previous.lastDeployedCommit === context.commit && previous.status === "success") {
+if (
+  previous?.stage === context.stage &&
+  previous.lastDeployedCommit === context.commit &&
+  previous.status === "success"
+) {
   console.log(`Preview for ${context.branch} already deployed at ${context.commit.slice(0, 7)}.`);
   process.exit(0);
 }
 
-console.log(`Deploying branch preview: branch=${context.branch} stage=${context.stage} commit=${context.commit.slice(0, 7)}`);
+console.log(
+  `Deploying branch preview: branch=${context.branch} stage=${context.stage} commit=${context.commit.slice(0, 7)}`,
+);
 
 writeState({
   ...context,

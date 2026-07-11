@@ -16,7 +16,8 @@
     "paths": {
       "@founder-mobile/ui": ["packages/ui/src/index.tsx"],
       "@founder-mobile/db": ["packages/db/src/index.ts"],
-      "@founder-mobile/db/*": ["packages/db/src/*"]
+      "@founder-mobile/db/*": ["packages/db/src/*"],
+      "@/*": ["packages/ui/src/*"]
     }
   }
 }
