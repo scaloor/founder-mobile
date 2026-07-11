@@ -67,7 +67,7 @@ writeState({
 
 try {
   run("bun", ["run", "build"]);
-  run("bun", ["run", "deploy", "--", "--stage", context.stage], {
+  run("bun", ["run", "deploy", "--", "--stage", context.stage, "--yes"], {
     ALCHEMY_STAGE: context.stage,
   });
 

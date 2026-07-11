@@ -10,7 +10,7 @@ if (process.env.CONFIRM_DESTROY_PREVIEW !== "1") {
 }
 
 console.log(`Destroying branch preview: branch=${branch} stage=${stage}`);
-const result = spawnSync("bun", ["run", "destroy", "--", "--stage", stage], {
+const result = spawnSync("bun", ["run", "destroy", "--", "--stage", stage, "--yes"], {
   cwd: process.cwd(),
   env: { ...process.env, ALCHEMY_STAGE: stage },
   stdio: "inherit",

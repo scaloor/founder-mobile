@@ -1,85 +1,88 @@
-import alchemy from "alchemy";
-import {
-  D1Database,
-  KVNamespace,
-  Queue,
-  R2Bucket,
-  TanStackStart,
-  Worker,
-} from "alchemy/cloudflare";
+import * as Alchemy from "alchemy";
+import * as Cloudflare from "alchemy/Cloudflare";
+import * as Effect from "effect/Effect";
 
-const app = await alchemy("founder-mobile");
-const stage = app.stage;
-const isProd = stage === "prod";
-
-const names = {
-  d1: `founder-mobile-${stage}-db`,
-  r2: `founder-mobile-${stage}-files`,
-  kv: `founder-mobile-${stage}-cache`,
-  queue: `founder-mobile-${stage}-jobs`,
-  apiWorker: `founder-mobile-${stage}-api`,
-  webWorker: `founder-mobile-${stage}-web`,
-};
-
-const db = await D1Database("db", {
-  name: names.d1,
-  migrationsDir: "packages/db/migrations",
-  migrationsTable: "drizzle_migrations",
-  readReplication: isProd ? { mode: "auto" } : { mode: "disabled" },
-});
-
-const files = await R2Bucket("files", {
-  name: names.r2,
-});
-
-const cache = await KVNamespace("cache", {
-  title: names.kv,
-});
-
-const jobs = await Queue("jobs", {
-  name: names.queue,
-});
-
-const api = await Worker("api", {
-  name: names.apiWorker,
-  cwd: ".",
-  entrypoint: "apps/backend/src/worker.ts",
-  compatibility: "node",
-  url: true,
-  bindings: {
-    DB: db,
-    FILES: files,
-    CACHE: cache,
-    JOBS: jobs,
-    ENVIRONMENT: stage,
+export default Alchemy.Stack(
+  "founder-mobile",
+  {
+    providers: Cloudflare.providers(),
+    state: Cloudflare.state(),
   },
-});
+  Effect.gen(function* () {
+    const stack = yield* Alchemy.Stack;
+    const stage = stack.stage;
+    const isProd = stage === "prod";
 
-const web = await TanStackStart("web", {
-  name: names.webWorker,
-  cwd: "apps/web",
-  build: {
-    command: "bun run build",
-    env: {
-      VITE_API_URL: api.url ?? "",
-    },
-  },
-  url: true,
-  bindings: {
-    API: api,
-    ENVIRONMENT: stage,
-  },
-});
+    const names = {
+      d1: `founder-mobile-${stage}-db`,
+      r2: `founder-mobile-${stage}-files`,
+      kv: `founder-mobile-${stage}-cache`,
+      queue: `founder-mobile-${stage}-jobs`,
+      apiWorker: `founder-mobile-${stage}-api`,
+      webWorker: `founder-mobile-${stage}-web`,
+    };
 
-console.log({
-  app: app.name,
-  stage,
-  production: isProd,
-  resources: names,
-  urls: {
-    api: api.url,
-    web: web.url,
-  },
-});
+    const db = yield* Cloudflare.D1.Database("db", {
+      name: names.d1,
+      migrationsDir: "packages/db/migrations",
+      migrationsTable: "drizzle_migrations",
+      readReplication: isProd ? { mode: "auto" } : { mode: "disabled" },
+    });
 
-await app.finalize();
+    const files = yield* Cloudflare.R2.Bucket("files", {
+      name: names.r2,
+    });
+
+    const cache = yield* Cloudflare.KV.Namespace("cache", {
+      title: names.kv,
+    });
+
+    const jobs = yield* Cloudflare.Queues.Queue("jobs", {
+      name: names.queue,
+    });
+
+    const api = yield* Cloudflare.Worker("api", {
+      name: names.apiWorker,
+      main: "apps/backend/src/worker.ts",
+      compatibility: {
+        flags: ["nodejs_compat"],
+      },
+      url: true,
+      env: {
+        DB: db,
+        FILES: files,
+        CACHE: cache,
+        JOBS: jobs,
+        ENVIRONMENT: stage,
+      },
+    });
+
+    const web = yield* Cloudflare.Website.Vite("web", {
+      name: names.webWorker,
+      rootDir: "apps/web",
+      compatibility: {
+        flags: ["nodejs_compat"],
+      },
+      url: true,
+      env: {
+        API: api,
+        ENVIRONMENT: stage,
+      },
+      assets: {
+        htmlHandling: "auto-trailing-slash",
+        notFoundHandling: "single-page-application",
+      },
+    });
+
+    return {
+      app: stack.name,
+      stage,
+      production: isProd,
+      resources: names,
+      urls: {
+        api: api.url,
+        web: web.url,
+      },
+    };
+  }),
+);
