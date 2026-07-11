@@ -1,14 +1,20 @@
 import { Hono } from "hono";
 import { Effect, pipe } from "effect";
+import { createAuth } from "@founder-mobile/auth";
 import { createD1Database, schema } from "@founder-mobile/db";
 
 export interface Env {
   DB: D1Database;
   ASSETS: Fetcher;
   ENVIRONMENT?: string;
+  BETTER_AUTH_SECRET?: string;
+  BETTER_AUTH_URL?: string;
+  BETTER_AUTH_TRUSTED_ORIGINS?: string;
 }
 
 const app = new Hono<{ Bindings: Env }>();
+
+app.on(["GET", "POST"], "/api/auth/**", (c) => createAuth(c.env).handler(c.req.raw));
 
 app.get("/health", (c) =>
   c.json({

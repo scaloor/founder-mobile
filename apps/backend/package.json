@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@effect/platform": "latest",
+    "@founder-mobile/auth": "workspace:*",
     "@founder-mobile/db": "workspace:*",
     "effect": "latest",
     "hono": "latest"

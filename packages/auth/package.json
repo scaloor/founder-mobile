@@ -1,0 +1,22 @@
+{
+  "name": "@founder-mobile/auth",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts",
+    "./client": "./src/client.ts",
+    "./config": "./src/config.ts"
+  },
+  "scripts": {
+    "typecheck": "tsgo -p tsconfig.json"
+  },
+  "dependencies": {
+    "@founder-mobile/db": "workspace:*",
+    "better-auth": "^1.6.23"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "latest",
+    "typescript": "7.0.2"
+  }
+}

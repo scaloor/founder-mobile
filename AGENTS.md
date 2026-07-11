@@ -11,6 +11,7 @@ Guidance for coding agents working in this repo.
 - Type checking uses TypeScript 7's native Go checker (`tsgo`) through `bun run typecheck`; do not replace it with legacy `tsc` unless explicitly asked.
 - Do not put secrets in source, docs, prompts, or generated reports.
 - Keep agent-facing tools/endpoints narrow and semantic; avoid raw SQL/API escape hatches.
+- Authentication is intentionally minimal. Before changing Better Auth configuration, adding OAuth providers, enabling username login, or introducing organizations/teams, read `docs/auth.md` and check the current Better Auth docs at <https://www.better-auth.com/docs>.
 
 ## Agent commit and preview workflow
 
@@ -87,6 +88,7 @@ If infrastructure files change, also run a dry/planning deploy once the project 
 - `apps/web`: web app shell, intended to become TanStack Start.
 - `apps/mobile`: Expo app shell.
 - `apps/backend`: Hono + Effect worker API.
+- `packages/auth`: Better Auth foundation mounted by the backend at `/api/auth/**`.
 - `packages/ui`: shared web/native UI primitives.
 - `packages/db`: Drizzle schema and D1 database helper.
 - `infra`: Alchemy stage-aware infra code.
